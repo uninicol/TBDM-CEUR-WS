@@ -71,12 +71,13 @@ def get_volume_metadata(volume_id):
 
     papers = []
     for li in soup.find('div', class_='CEURTOC').find_all('li'):
-        is_paper = li.a and li.find('span', class_='CEURTITLE') and li.find('span', class_='CEURPAGES')
+        is_paper = li.a and li.find('span', class_='CEURTITLE')
         if not is_paper:
+            print("Volume " + volume_id + " contains non-paper content")
             continue
         url = base_url + volume_id + "/" + li.a.get('href')
         title = li.find('span', class_='CEURTITLE').string
-        pages = li.find('span', class_='CEURPAGES').string
+        pages = li.find('span', class_='CEURPAGES').string if li.find('span', class_='CEURPAGES') else None
         author = [author.string for author in li.find_all('span', class_='CEURAUTHOR')]
         abstract, keywords, content = get_paper_content(url)
         papers.append(Paper(url, title, pages, author, abstract, keywords, content))
