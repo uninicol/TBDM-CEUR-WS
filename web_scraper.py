@@ -33,6 +33,9 @@ class Volume:
         return volume_dict
 
 base_url = "https://ceur-ws.org/"
+client = pymongo.MongoClient("mongodb+srv://admin:KnNJJlnMn0B8bs22@cluster0.lp7lpsn.mongodb.net/ceur_ws?retryWrites=true&w=majority&appName=Cluster0")
+db = client["ceur_ws"]
+collection = db["papers"]
 
 # Get all volumes
 def get_all_volumes():
@@ -86,15 +89,15 @@ def get_volume_metadata(volume_id):
 
 def save_to_db(data):
     print("Saving volume " + data["volnr"] + " to database")
-    client = pymongo.MongoClient("mongodb+srv://admin:KnNJJlnMn0B8bs22@cluster0.lp7lpsn.mongodb.net/ceur_ws?retryWrites=true&w=majority&appName=Cluster0")
-    db = client["ceur_ws"]
-    collection = db["papers"]
-
     collection.insert_one(data)
 
 # Get all volumes
 all_volumes = get_all_volumes()
 for volume in all_volumes:
+    # check if already in db
+    if collection.find_one({"volnr": volume}):
+        print("Volume " + volume + " already in database")
+        continue
     volume_metadata = get_volume_metadata(volume)
     volume_dict = volume_metadata.to_dict()
     save_to_db(volume_dict)
