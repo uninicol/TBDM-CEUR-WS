@@ -1,6 +1,11 @@
+import logging
 from pymongo import MongoClient
 
 class Database:
+
+    logging.basicConfig(filename='scraping.log', level=logging.INFO,
+                        format='%(asctime)s - %(levelname)s - %(message)s')
+    
     def __init__(self, uri, db_name):
         self.client = MongoClient(uri)
         self.db = self.client[db_name]
@@ -8,11 +13,11 @@ class Database:
         self.volumes_collection = self.db["volumes"]
 
     def save_volume(self, volume_dict):
-        print("Saving volume " + volume_dict["volnr"] + " to database")
+        logging.debug(f"Saving volume {volume_dict["volnr"]} to database")
         return self.volumes_collection.insert_one(volume_dict).inserted_id
 
     def save_paper(self, paper_dict):
-        print("Saving paper " + paper_dict["title"] + " to database")
+        logging.debug(f"Saving volume {paper_dict["title"]} to database")
         self.papers_collection.insert_one(paper_dict)
 
     def volume_exists(self, volnr):

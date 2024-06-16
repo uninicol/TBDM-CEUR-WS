@@ -1,3 +1,4 @@
+import logging
 import requests
 from bs4 import BeautifulSoup
 from io import BytesIO
@@ -9,8 +10,11 @@ import config
 class Scraper:
     base_url = config.BASE_URL
 
+    logging.basicConfig(filename='scraping.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
+
     def get_all_volumes(self):
-        print("Getting all volumes")
+        logging.info("Getting all volumes")
         response = requests.get(self.base_url)
         soup = BeautifulSoup(response.text, 'html.parser')
         vol_tags = soup.find_all('a', {'name': lambda value: value and value.startswith('Vol-')})
@@ -18,7 +22,8 @@ class Scraper:
         return vol_values
 
     def get_volume_metadata(self, volume_id):
-        print("Getting metadata for volume: " + volume_id)
+        logging.info(f"Getting metadata for {volume_id}")
+
         response = requests.get(self.base_url + volume_id)
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -36,7 +41,7 @@ class Scraper:
         return volume
     
     def get_volume_papers(self, volume_id):
-        print("Getting all papers for volume: " + volume_id)
+        logging.info(f"Getting all papers for {volume_id}")
         response = requests.get(self.base_url + volume_id)
         soup = BeautifulSoup(response.text, 'html.parser')
 
@@ -45,7 +50,7 @@ class Scraper:
             title_element = li.find('span', class_='CEURTITLE')
             is_paper = li.a and title_element and title_element.string
             if not is_paper:
-                print("Volume " + volume_id + " contains non-paper content")
+                logging.info(f"Volume {volume_id} contains non-paper content")
                 continue
 
             paper = Paper(
@@ -59,7 +64,7 @@ class Scraper:
         return papers
     
     def get_paper_metadata(self, paper_url):
-        print("Getting pdf content for paper: " + paper_url)
+        logging.debug(f"Getting pdf content for paper {paper_url}")
         response = requests.get(paper_url)
         file = BytesIO(response.content)
         content = extract_text(file)

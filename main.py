@@ -1,11 +1,15 @@
+import logging
+import config
 from concurrent.futures import ThreadPoolExecutor
 from scraper.scraper import Scraper
 from db.database import Database
-import config
+
+logging.basicConfig(filename='scraping.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
 def scrape_volume(volume_id, scraper, database):
     if database.volume_exists(volume_id):
-        print("Volume " + volume_id + " already in database")
+        logging.info(f"Volume {volume_id} already in database")
         return
             
     # Get and save volume to database
@@ -15,7 +19,7 @@ def scrape_volume(volume_id, scraper, database):
     # Get and save papers to database
     volume_papers = scraper.get_volume_papers(volume_id)
     for paper in volume_papers:
-        paper.abstract, paper.keywords, paper.content = scraper.get_paper_metadata(paper.url)
+        # paper.abstract, paper.keywords, paper.content = scraper.get_paper_metadata(paper.url)
         database.save_paper(paper.__dict__)
 
 def main():
