@@ -14,12 +14,13 @@ def scrape_volume(volume_id, scraper, database):
             
     # Get and save volume to database
     volume_metadata = scraper.get_volume_metadata(volume_id)
-    database.save_volume(volume_metadata.__dict__)
+    volume_object_id = database.save_volume(volume_metadata.__dict__)
 
     # Get and save papers to database
     volume_papers = scraper.get_volume_papers(volume_id)
     for paper in volume_papers:
         # paper.abstract, paper.keywords, paper.content = scraper.get_paper_metadata(paper.url)
+        paper.volume_id = volume_object_id
         database.save_paper(paper.__dict__)
 
 def main():

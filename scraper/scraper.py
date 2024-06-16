@@ -57,8 +57,7 @@ class Scraper:
                 url=self.base_url + volume_id + "/" + li.a.get('href'),
                 title=title_element.string,
                 pages=li.find('span', class_='CEURPAGES').string if li.find('span', class_='CEURPAGES') else None,
-                author=[author.string for author in li.find_all('span', class_='CEURAUTHOR')],
-                volume_id=volume_id
+                author=[author.string for author in li.find_all('span', class_='CEURAUTHOR')]
             )
             papers.append(paper)
         return papers
