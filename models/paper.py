@@ -8,6 +8,3 @@ class Paper:
         self.keywords = keywords
         self.content = content
         self.volume_id = volume_id
-
-    def to_dict(self):
-        return self.__dict__
