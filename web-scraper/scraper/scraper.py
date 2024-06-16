@@ -1,10 +1,8 @@
 import logging
 import requests
 from bs4 import BeautifulSoup
-from io import BytesIO
 from models.paper import Paper
 from models.volume import Volume
-from pdfminer.high_level import extract_text
 import config
 
 class Scraper:
@@ -61,12 +59,3 @@ class Scraper:
             )
             papers.append(paper)
         return papers
-    
-    def get_paper_metadata(self, paper_url):
-        logging.debug(f"Getting pdf content for paper {paper_url}")
-        response = requests.get(paper_url)
-        file = BytesIO(response.content)
-        content = extract_text(file)
-        abstract = content[content.find('Abstract'):content.find('Keywords')].replace('Abstract', '').strip()
-        keywords = content[content.find('Keywords'):content.find('1. Introduction')].replace('Keywords', '').strip()
-        return abstract, keywords, content

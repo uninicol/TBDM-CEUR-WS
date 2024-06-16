@@ -11,7 +11,7 @@ Before running the script, ensure you have the following installed:
 1. **Clone the repository**:
     ```sh
     git clone https://github.com/AronOehrli/TBDM-CEUR-WS.git
-    cd TBDM-CEUR-WS
+    cd TBDM-CEUR-WS/web-scraper
     ```
 
 2. **Create and activate a virtual environment**:
@@ -33,3 +33,13 @@ Update the `config.py` file with the appropriate MongoDB URI.
 MONGO_URI = "mongodb://localhost:27017/" # Replace with the actual URI
 DB_NAME = "ceur_ws"
 ```
+
+## Running the Script
+
+To run the script, execute the following command:
+
+```sh
+python main.py
+```
+
+Logs can be analyzed and found in `scraping.log`.

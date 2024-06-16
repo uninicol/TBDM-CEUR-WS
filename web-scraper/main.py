@@ -19,7 +19,6 @@ def scrape_volume(volume_id, scraper, database):
     # Get and save papers to database
     volume_papers = scraper.get_volume_papers(volume_id)
     for paper in volume_papers:
-        paper.abstract, paper.keywords, paper.content = scraper.get_paper_metadata(paper.url)
         paper.volume_id = volume_object_id
         database.save_paper(paper.__dict__)
 
@@ -29,7 +28,7 @@ def main():
 
     all_volumes = scraper.get_all_volumes()
 
-    with ThreadPoolExecutor(max_workers=5) as executor:  # Adjust max_workers as needed
+    with ThreadPoolExecutor(max_workers=20) as executor:  # Adjust max_workers as needed
         # Submit each volume scraping task to executor
         futures = []
         for volume_id in all_volumes:
