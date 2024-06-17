@@ -1,21 +1,58 @@
-## Prerequisites
+## Open pre-build ceur_ws dashboard in Tableau Desktop
+
+### 1. Clone repository 
+- Clone this repository "https://github.com/AronOehrli/TBDM-CEUR-WS.git"
+
+### 2. Launch Tableau Desktop
+- Open the Tableau Desktop application on your computer, if not alread running.
+
+### 3. Open the Workbook File
+
+#### Option 1: From the Start Page
+1. On the Tableau start page, click on `Open` under the `Connect` pane.
+2. Navigate to the location where you cloned the repository.
+3. Select the `.twb` file and click `Open`. (`ceur_ws_bi_dashboard_tableau.twb`)
+
+#### Option 2: Using the File Menu
+1. Go to `File` in the top menu.
+2. Select `Open...`.
+3. Navigate to the location where you cloned the repository.
+4. Select the `.twb` file and click `Open`. (`ceur_ws_bi_dashboard_tableau.twb`)
+
+### 4. Extract Data if Needed (optional)
+- If you are opening a `.twbx` file that contains extracted data, Tableau will prompt you to extract the data (.hyper file). Follow the prompts to extract the data to a local location if needed.
+- The .hyper files are located in `/tableau-bi/cleaned_data_collections`
+
+---
+
+By following these steps, you can open and start working with our Tableau workbook.
+
+---
+
+## Run your own Tableau queries on the ceur_ws data
+
+### Prerequisites
 1. **Tableau Desktop**: Ensure you have Tableau Desktop installed on your machine.
-   - You can download Tableau Desktop from the [Tableau website](https://www.tableau.com/products/desktop).
+   - You can download Tableau Desktop from the [Tableau Desktop](https://www.tableau.com/products/desktop).
+
+2. **Tableau Prep Builder (optional)**: Ensure you have Tableau Prep Builder installed on your machine.
+   - You can download Tableau Desktop from the [Tableau Prep Builder: Dowload](https://www.tableau.com/products/prep/download).
+   - The Tableau Prep Builder is only required if you want to structure, transform and clean the ceur_ws data before using in Tableau Desktop. This is needed to represent nested data (arrays) in Tableau visualizations and to extract certain data like paper pages or publication details such as the publication city.
    
 2. **MongoDB Atlas Account**: You need an active MongoDB Atlas account and a running cluster.
    - Sign up for a MongoDB Atlas account [here](https://www.mongodb.com/cloud/atlas).
-   - Create a cluster and database if you don't already have one.
+   - A cluster with the collections of ceur_ws is already existing. Contact the contributors of this repository for access.
 
 3. **MongoDB Atlas Cluster Access**:
-   - Make sure you have the correct permissions to access the MongoDB Atlas cluster.
+   - Make sure you have the correct permissions to access the MongoDB Atlas cluster. Ask the contributors for access and password
    - Ensure your IP address is whitelisted in MongoDB Atlas to allow connections from your machine.
 
 4. **Java Runtime Environment (JRE)**: The MongoDB JDBC driver requires Java.
    - Ensure you have JRE 8 or later installed. You can download it from [Oracle's website](https://www.oracle.com/java/technologies/javase-downloads.html) or use OpenJDK.
 
-5. **Network Configuration**: Ensure that your network allows outbound connections to MongoDB Atlas (typically port 27017).
+5. **Network Configuration**: Ensure that your network allows outbound connections to MongoDB Atlas (typically port 27017), usually, VPNs do not work.
 
-## Installation - MongoDB Atlas Tableau Connector
+### Installation - MongoDB Atlas Tableau Connector
 
 ### Step 1: Download MongoDB JDBC Driver
 1. **Download the driver from**: [MongoDB JDBC 2.1.2](https://repo1.maven.org/maven2/org/mongodb/mongodb-jdbc/2.1.2/)
@@ -29,53 +66,37 @@
    - **Windows**: `C:\Program Files\Tableau\Connectors`
    - **macOS**: `~/Library/Tableau/Connectors`
 
-### Step 3: Establish a New Server Connection in Tableau
-1. **Go to** `Connect` and choose `Server`
-2. **Select** `MongoDB Atlas von MongoDB`
-3. **Provide the credentials of your server as requested**:
+### Step 3: Establish a New Server Connection in Tableau Desktop
+1. **Open Tableau Desktop**
+2. **Go to** `Connect` and choose `Server`
+3. **Select** `MongoDB Atlas by MongoDB` (this driver has been installed in step 1 & 2)
+4. **Provide the credentials of your server as requested**:
    - **URL**: `mongodb://atlas-sql-6627b8c2756cdc360b8fef3e-rpb1k.a.query.mongodb.net/ceur_ws?ssl=true&authSource=admin`
    - **DB**: `ceur_ws`
    - **Username**: `admin`
-   - **Password**: `***`
+   - **Password**: `on request`
 
-4. **Alternatively, search for the connection details**:
-   - **Go to our DB**: [MongoDB Atlas](https://cloud.mongodb.com/v2/6627b85d3306e4391ba7a287#/overview)
+5. **Alternatively, search for the connection details**:
+   - **Go to our MongoDB**: [MongoDB Atlas](https://cloud.mongodb.com/v2/6627b85d3306e4391ba7a287#/overview)
    - **Under** `Connect`, choose `Atlas SQL`
    - **Select** `Tableau Connector` and the correct Collection `ceur_ws`
 
-## Full Guides
+6. **Check connection**
+   - **Now you should see the collections/tables of the ceur_ws database in your Tableau data source section** 
+   - **On the top right corner select** `Extract` from the `Connection` selection. This enables queries on your local machine rather live queries on the MongoDB.
+
+### Step 4: Explore the raw data in Tableau Desktop
+1. **Join the tables (papers & volumes) in the data source section.** Use the `_id` in the volume collection and `volume_id` in the papers collection to join the tables/collections.
+2. **Create visualisations in Tableau**
+
+### Step 5 (optional): Establish a New Server Connection in Tableau Prep Builder
+1. **Onyl needed if you intend to prepare the data as described in prerequisits 2.**
+2. **Follow the same steps as for Tableau Desktop new server connection.** The driver and connector are already installed. It is only needed to set up the conneciton to our MongoDB in Tablea Prep Builder (Step 3).
+3. **Once connected you can prepare the ceur_ws data as needed in Tableau Desktop.**
+4. **An example of a data schema can be seen and used `/tableau-bi/prep_builder_pipeline/ceur_ws_bi_tableau_prep_240617.tfl`
+
+## Full Tableau Connector Installation Guides
 - [MongoDB and Tableau Compatibility](https://www.mongodb.com/resources/products/compatibilities/mongodb-tableau?jmp=tbl)
 - [Tableau Help - MongoDB](https://help.tableau.com/current/pro/desktop/en-us/examples_mongodb.htm)
 - [MongoDB Atlas Data Federation with Tableau](https://www.mongodb.com/docs/atlas/data-federation/query/sql/tableau/connect/)
 - [MongoDB Tableau Connector Download](https://www.mongodb.com/try/download/tableau-connector)
-
-
-## Steps to Open a Workbook
-
-### 1. Launch Tableau Desktop
-- Open the Tableau Desktop application on your computer, if not alread running.
-
-### 2. Open a Workbook File
-
-#### Option 1: From the Start Page
-1. On the Tableau start page, click on `Open` under the `Connect` pane.
-2. Navigate to the location where your `.twb` or `.twbx` file is stored.
-3. Select the file and click `Open`.
-
-#### Option 2: Using the File Menu
-1. Go to `File` in the top menu.
-2. Select `Open...`.
-3. Navigate to the location where your `.twb` or `.twbx` file is stored.
-4. Select the file and click `Open`.
-
-### 3. Extract Data if Needed
-- If you are opening a `.twbx` file that contains extracted data, Tableau will prompt you to extract the data (.hyper file). Follow the prompts to extract the data to a local location if needed.
-
-### 4. Verify Data Source Connections
-1. Ensure that the data sources referenced by the workbook are accessible.
-   - If the workbook uses live connections to databases (MongoDB), you might need to enter credentials or ensure network access to those sources.
-2. If the workbook references local files (e.g., Excel, CSV), ensure those files are in the expected locations.
-
----
-
-By following these steps, you can open and start working with our Tableau workbook.
