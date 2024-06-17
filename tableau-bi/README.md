@@ -26,7 +26,7 @@ You can either:
 
 ### 4. Extract Data if Needed (optional)
 - If you are opening a `.twbx` file that contains extracted data, Tableau will prompt you to extract the data (.hyper file). Follow the prompts to extract the data to a local location if needed.
-- The .hyper files are located in `/tableau-bi/cleaned_data_collections`
+- The .hyper files are located in `/tableau-bi/prep_data_collections`
 
 By following these steps, you can open and start working with our Tableau workbook.
 
@@ -97,7 +97,7 @@ By following these steps, you can open and start working with our Tableau workbo
 1. **Onyl needed if you intend to prepare the data as described in prerequisits 2.**
 2. **Follow the same steps as for Tableau Desktop new server connection.** The driver and connector are already installed. It is only needed to set up the conneciton to our MongoDB in Tablea Prep Builder (Step 3).
 3. **Once connected you can prepare the ceur_ws data as needed in Tableau Desktop.**
-4. **An example of a data schema can be seen and used** `/tableau-bi/prep_builder_pipeline/ceur_ws_bi_tableau_prep_240617.tfl`
+4. **An example of a data schema can be seen and used** `/tableau-bi/tableau_prep_builder_schema/ceur_ws_bi_tableau_prep_240617.tfl`
 
 
 ## Full Tableau Connector Installation Guides
