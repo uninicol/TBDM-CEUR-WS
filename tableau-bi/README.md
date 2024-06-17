@@ -23,11 +23,8 @@
 - If you are opening a `.twbx` file that contains extracted data, Tableau will prompt you to extract the data (.hyper file). Follow the prompts to extract the data to a local location if needed.
 - The .hyper files are located in `/tableau-bi/cleaned_data_collections`
 
----
-
 By following these steps, you can open and start working with our Tableau workbook.
 
----
 
 ## Run your own Tableau queries on the ceur_ws data
 
@@ -52,21 +49,22 @@ By following these steps, you can open and start working with our Tableau workbo
 
 5. **Network Configuration**: Ensure that your network allows outbound connections to MongoDB Atlas (typically port 27017), usually, VPNs do not work.
 
+
 ### Installation - MongoDB Atlas Tableau Connector
 
-### Step 1: Download MongoDB JDBC Driver
+#### Step 1: Download MongoDB JDBC Driver
 1. **Download the driver from**: [MongoDB JDBC 2.1.2](https://repo1.maven.org/maven2/org/mongodb/mongodb-jdbc/2.1.2/)
 2. **Save the driver in the following folder (create the folder if it doesn't exist)**:
    - **Windows**: `C:\Program Files\Tableau\Drivers`
    - **macOS**: `~/Library/Tableau/Drivers`
 
-### Step 2: Download Custom Tableau Connector (TACO file)
+#### Step 2: Download Custom Tableau Connector (TACO file)
 1. **Download the TACO file from one of the following links**: [MongoDB JDBC TACO 1.2.0](https://translators-connectors-releases.s3.amazonaws.com/mongo-tableau-connector/mongodb-jdbc-1.2.0.taco)
 2. **Save the TACO file in the following folder (create the folder if it doesn't exist)**:
    - **Windows**: `C:\Program Files\Tableau\Connectors`
    - **macOS**: `~/Library/Tableau/Connectors`
 
-### Step 3: Establish a New Server Connection in Tableau Desktop
+#### Step 3: Establish a New Server Connection in Tableau Desktop
 1. **Open Tableau Desktop**
 2. **Go to** `Connect` and choose `Server`
 3. **Select** `MongoDB Atlas by MongoDB` (this driver has been installed in step 1 & 2)
@@ -85,18 +83,21 @@ By following these steps, you can open and start working with our Tableau workbo
    - **Now you should see the collections/tables of the ceur_ws database in your Tableau data source section** 
    - **On the top right corner select** `Extract` from the `Connection` selection. This enables queries on your local machine rather live queries on the MongoDB.
 
-### Step 4: Explore the raw data in Tableau Desktop
+### Explore the raw data in Tableau Desktop
 1. **Join the tables (papers & volumes) in the data source section.** Use the `_id` in the volume collection and `volume_id` in the papers collection to join the tables/collections.
 2. **Create visualisations in Tableau**
 
-### Step 5 (optional): Establish a New Server Connection in Tableau Prep Builder
+### Establish a New Server Connection in Tableau Prep Builder (optional)
 1. **Onyl needed if you intend to prepare the data as described in prerequisits 2.**
 2. **Follow the same steps as for Tableau Desktop new server connection.** The driver and connector are already installed. It is only needed to set up the conneciton to our MongoDB in Tablea Prep Builder (Step 3).
 3. **Once connected you can prepare the ceur_ws data as needed in Tableau Desktop.**
-4. **An example of a data schema can be seen and used `/tableau-bi/prep_builder_pipeline/ceur_ws_bi_tableau_prep_240617.tfl`
+4. **An example of a data schema can be seen and used** `/tableau-bi/prep_builder_pipeline/ceur_ws_bi_tableau_prep_240617.tfl`
+
 
 ## Full Tableau Connector Installation Guides
 - [MongoDB and Tableau Compatibility](https://www.mongodb.com/resources/products/compatibilities/mongodb-tableau?jmp=tbl)
 - [Tableau Help - MongoDB](https://help.tableau.com/current/pro/desktop/en-us/examples_mongodb.htm)
 - [MongoDB Atlas Data Federation with Tableau](https://www.mongodb.com/docs/atlas/data-federation/query/sql/tableau/connect/)
 - [MongoDB Tableau Connector Download](https://www.mongodb.com/try/download/tableau-connector)
+
+---
