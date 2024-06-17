@@ -1,4 +1,9 @@
-## Open pre-build ceur_ws dashboard in Tableau Desktop
+# Tableau BI for ceur_ws
+You can either: 
+1. Open our pre-build ceur_ws dashboard on your local Tableau Desktop, or
+2. Run your own Tableau queries on the ceur_ws data by connecting your local Tableau Desktop and Tableau Prep Builder to our ceur_ws collections on MongoDB Atlas.
+
+## 1 Open pre-build ceur_ws dashboard in Tableau Desktop
 
 ### 1. Clone repository 
 - Clone this repository "https://github.com/AronOehrli/TBDM-CEUR-WS.git"
@@ -25,8 +30,9 @@
 
 By following these steps, you can open and start working with our Tableau workbook.
 
+---
 
-## Run your own Tableau queries on the ceur_ws data
+## 2 Run your own Tableau queries on the ceur_ws data
 
 ### Prerequisites
 1. **Tableau Desktop**: Ensure you have Tableau Desktop installed on your machine.
