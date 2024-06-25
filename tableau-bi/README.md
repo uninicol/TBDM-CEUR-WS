@@ -1,7 +1,7 @@
 # Tableau BI for ceur_ws
 You can either: 
-1. Open our pre-build ceur_ws dashboard on your local Tableau Desktop, or
-2. Run your own Tableau queries on the ceur_ws data by connecting your local Tableau Desktop and Tableau Prep Builder to our ceur_ws collections on MongoDB Atlas.
+1. [Open pre-build ceur_ws dashboard in Tableau Desktop](#1-open-pre-build-ceur_ws-dashboard-in-tableau-desktop)
+2. [Run your own Tableau queries on the ceur_ws data](#2-run-your-own-tableau-queries-on-the-ceur_ws-data)
 
 ## 1 Open pre-build ceur_ws dashboard in Tableau Desktop
 
