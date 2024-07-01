@@ -5,9 +5,10 @@ This is a simple Flask-based search application where users can input a search t
 
 1. [Requirements](#requirements)
 2. [Installation](#installation)
-2. [Running the Application](#running-the-application)
-3. [URL endpoints](#url-endpoints)
-3. [Deplyoment](#deployment)
+3. [Configuration](#configuration)
+4. [Running the Application](#running-the-application)
+5. [URL endpoints](#url-endpoints)
+6. [Deplyoment](#deployment)
 
 ## Requirements
 - Python 3.8+
@@ -33,6 +34,16 @@ Install the dependencies:
 
 ```sh
 pip install -r requirements.txt
+```
+
+## Configuration
+
+Create a `.env` file in the `search-app` directory and add the following environment variables:
+
+```env
+GOOGLE_API_KEY = "12345679" # Replace with the actual API Key
+DATABASE_URL = "mongodb://localhost:27017/" # Replace with the actual URI
+DB_NAME = "ceur_ws"
 ```
 
 ## Running the Application
