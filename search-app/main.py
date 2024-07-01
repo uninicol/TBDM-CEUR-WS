@@ -15,7 +15,6 @@ def home():
 def search():
     query = request.args.get('q')
     if query:
-        query = "What is the CERIA framework?"
         query_result = pdf_search.search(query)
 
         result = f"Result for query '{query}': {query_result}"
