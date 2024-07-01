@@ -29,7 +29,7 @@ The primary tasks outlined in the assignment are reflected in the repository str
 ---
 ## Methodology and Technology Being Used
 To address this issue, we followed the proposed structure by our professor, Dr. Massimo De Donato Callisto. The solution involved importing the metadata from the CEUR website to a NoSQL database and analyzing the data with a Analytic Tool and an LLM. For data import, we used a web scraper to navigate the website and open each PDF to extract information. We utilized MongoDB for our NoSQL database. The analytical part was conducted using Tableau, which connected to the MongoDB database through a Tableau-MongoDB connector. The LLM component was implemented using MongoDB's vector search capabilities and Google's Gemini LLM.
-![image](https://github.com/AronOehrli/TBDM-CEUR-WS/assets/110410464/d0ece1c0-1123-42c2-b502-582f933ea5ea)
+![image](https://github.com/AronOehrli/TBDM-CEUR-WS/assets/110410464/4301a46b-e52e-4d72-b1a6-f3aa585167bd)
 
 
 ## Technical Implementation
