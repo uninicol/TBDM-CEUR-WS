@@ -27,9 +27,10 @@ Before running the script, ensure you have the following installed:
 
 ## Configuration
 
-Update the `config.py` file with the appropriate MongoDB URI.
+Create a `.env` file in the `web-scraper` directory and add the following environment variables:
 
-```python
+```env
+BASE_URL = "https://ceur-ws.org/"
 MONGO_URI = "mongodb://localhost:27017/" # Replace with the actual URI
 DB_NAME = "ceur_ws"
 ```

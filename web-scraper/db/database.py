@@ -1,4 +1,5 @@
 import logging
+import os
 from pymongo import MongoClient
 
 class Database:
@@ -6,9 +7,9 @@ class Database:
     logging.basicConfig(filename='scraping.log', level=logging.INFO,
                         format='%(asctime)s - %(levelname)s - %(message)s')
     
-    def __init__(self, uri, db_name):
-        self.client = MongoClient(uri)
-        self.db = self.client[db_name]
+    def __init__(self):
+        self.client = MongoClient(os.getenv('DATABASE_URL'))
+        self.db = self.client[os.getenv('DB_NAME')]
         self.papers_collection = self.db["papers"]
         self.volumes_collection = self.db["volumes"]
 

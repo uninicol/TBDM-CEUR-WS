@@ -1,9 +1,10 @@
 import logging
-import config
 from concurrent.futures import ThreadPoolExecutor
 from scraper.scraper import Scraper
 from db.database import Database
+from dotenv import load_dotenv
 
+load_dotenv()
 logging.basicConfig(filename='scraping.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -24,7 +25,7 @@ def scrape_volume(volume_id, scraper, database):
 
 def main():
     scraper = Scraper()
-    database = Database(uri=config.MONGO_URI, db_name=config.DB_NAME)
+    database = Database()
 
     all_volumes = scraper.get_all_volumes()
 

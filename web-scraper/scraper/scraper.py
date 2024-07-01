@@ -1,12 +1,12 @@
 import logging
+import os
 import requests
 from bs4 import BeautifulSoup
 from models.paper import Paper
 from models.volume import Volume
-import config
 
 class Scraper:
-    base_url = config.BASE_URL
+    base_url = os.getenv('BASE_URL')
 
     logging.basicConfig(filename='scraping.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
