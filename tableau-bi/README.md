@@ -59,7 +59,7 @@ By following these steps, you can open and start working with our Tableau workbo
 ### Installation - MongoDB Atlas Tableau Connector
 
 #### Step 1: Download MongoDB JDBC Driver
-1. **Download the driver from**: [MongoDB JDBC 2.1.2](https://repo1.maven.org/maven2/org/mongodb/mongodb-jdbc/2.1.2/)
+1. **Download the driver from**: [MongoDB JDBC 2.1.2](https://repo1.maven.org/maven2/org/mongodb/mongodb-jdbc/2.1.2/) (all.jar file)
 2. **Save the driver in the following folder (create the folder if it doesn't exist)**:
    - **Windows**: `C:\Program Files\Tableau\Drivers`
    - **macOS**: `~/Library/Tableau/Drivers`
