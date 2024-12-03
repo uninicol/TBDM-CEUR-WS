@@ -1,31 +1,44 @@
+import json
 import logging
 from concurrent.futures import ThreadPoolExecutor
+import os
+from pathlib import Path
+from models.volume import VolumeEncoder
 from scraper.scraper import Scraper
 from db.database import Database
 from dotenv import load_dotenv
 
 load_dotenv()
-logging.basicConfig(filename='scraping.log', level=logging.INFO,
-                    format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    filename="scraping.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s",
+)
 
-def scrape_volume(volume_id, scraper, database):
-    if database.volume_exists(volume_id):
-        logging.info(f"Volume {volume_id} already in database")
-        return
-            
-    # Get and save volume to database
+
+def scrape_volume(volume_id: int, scraper: Scraper):
     volume_metadata = scraper.get_volume_metadata(volume_id)
-    volume_object_id = database.save_volume(volume_metadata.__dict__)
+    if not volume_metadata:
+        return
 
-    # Get and save papers to database
     volume_papers = scraper.get_volume_papers(volume_id)
-    for paper in volume_papers:
-        paper.volume_id = volume_object_id
-        database.save_paper(paper.__dict__)
+    volume_metadata.papers = volume_papers
+
+    path = Path("Volumes")
+    os.makedirs(path, exist_ok=True)
+
+    # Convert to JSON
+    json_data = json.dumps(volume_metadata, cls = VolumeEncoder, indent=4)
+
+    # Save to file
+    file_path = os.path.join(path, f"{volume_metadata.volnr}.json")
+    with open(file_path, "w") as file:
+        file.write(json_data)
+
 
 def main():
     scraper = Scraper()
-    database = Database()
+    # database = Database()
 
     all_volumes = scraper.get_all_volumes()
 
@@ -33,11 +46,12 @@ def main():
         # Submit each volume scraping task to executor
         futures = []
         for volume_id in all_volumes:
-            futures.append(executor.submit(scrape_volume, volume_id, scraper, database))
+            futures.append(executor.submit(scrape_volume, volume_id, scraper))
 
         # Wait for all tasks to complete
         for future in futures:
-            future.result() 
+            future.result()
+
 
 if __name__ == "__main__":
     main()

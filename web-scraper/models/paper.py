@@ -1,7 +1,14 @@
 class Paper:
-    def __init__(self, url, title, pages, author, volume_id=None):
+    def __init__(self, url, title, pages, author):
         self.url = url
         self.title = title
         self.pages = pages
         self.author = author
-        self.volume_id = volume_id
+    
+    def to_dict(self):
+        return {
+            "url": self.url,
+            "title": self.title,
+            "pages": self.pages,
+            "author": self.author,
+        }
